@@ -5,6 +5,6 @@ export function createHero(scene) {
     hero.position.z = 0;
     hero.position.x = 10;
     hero.position.y = 3;
-
     return hero;
 }
+
