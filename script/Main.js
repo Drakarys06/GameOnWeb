@@ -1,4 +1,4 @@
-import { createLevel } from "./Level.js";
+import Level from "./Level.js";
 import Listener from "./Listener.js";
 import Hero from "./Hero.js";
 import Camera from "./Camera.js";
@@ -14,7 +14,8 @@ const createScene = function () {
     scene.enablePhysics();
 
     //creation of the level
-    createLevel(scene);
+    var level = new Level(scene)
+    level.createLevel();
     var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
     light.intensity = 0.8;
 

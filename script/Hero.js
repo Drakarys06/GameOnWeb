@@ -2,7 +2,7 @@ export default class Hero {
     constructor(scene) {
         this.hero = BABYLON.MeshBuilder.CreateSphere("Hero", { diameter: 2 }, scene);
 
-        this.hero.position.x = 10;
+        this.hero.position.x = -4;
         this.hero.position.y = 6;
         this.hero.position.z = 0;
 

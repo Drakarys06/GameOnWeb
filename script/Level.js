@@ -1,31 +1,48 @@
-import { createBox } from "./Box.js";
+import { createBlock } from "./Block.js";
+import { createSlab } from "./Slab.js";
 
-export function createLevel(scene){
+export default class Level {
 
-    //Level 1
-    var box = new createBox(scene, 15, 0);
-    box = new createBox(scene, 15, 4);
-    box = new createBox(scene, 15, 8);
-    box = new createBox(scene, 15, 12);
-    box = new createBox(scene, 10, 0);
-    box = new createBox(scene, 10, 12);
-    box = new createBox(scene, 5, 0);
-    box = new createBox(scene, 5, 12);
-    box = new createBox(scene, 0, 0);
-    box = new createBox(scene, 0, 12);
-    box = new createBox(scene, -5, 0);
-    box = new createBox(scene, -5, 12);
-    box = new createBox(scene, -10, 0);
-    box = new createBox(scene, -10, 12);
-    box = new createBox(scene, -15, 0);
-    box = new createBox(scene, -15, 12);
-    box = new createBox(scene, -20, 0);
-    box = new createBox(scene, -20, 12);
-    box = new createBox(scene, -25, 0);
-    box = new createBox(scene, -25, 12);
-    box = new createBox(scene, -30, 0);
-    box = new createBox(scene, -30, 12);
-    box = new createBox(scene, -35, 0);
-    box = new createBox(scene, -35, 8);
-    box = new createBox(scene, -35, 12);
+    constructor(scene) {
+        this.scene = scene;
+        this.block = new createBlock(scene, 0, 0);
+        this.map = "Test";
+    }
+
+    createLevel() {
+        //creation of the level
+        this.getMap();
+        var x = 0;
+        var y = 0;
+        for (let i = 0; i < this.map.length; i++) {
+            for (let j = 0; j < this.map[i].length; j++) {
+                if (this.map[i][j] == 'X') {
+                    this.block = new createBlock(this.scene, -(x*5), y);
+                    x++;
+                }
+                if (this.map[i][j] == '_') {
+                    this.block = new createSlab(this.scene, -(x*5), y-1);
+                    x++;
+                }
+                if (this.map[i][j] == 'L') {
+                    x = 0;
+                    y += 4;
+                }
+                if (this.map[i][j] == '-') {
+                    x++;
+                }
+            }
+        }
+    }
+
+    getMap() {
+        this.map =
+        //Level 1       X = block, _ = slab, L = new line, - = empty space
+            'XXXXXXX___XXXXXL' +      //down of the level
+            'X----------__XXL' +
+            'X-------------XL' + 
+            'XXXXXXXXXXXXXXXL';      //up of the level
+        //Level 2
+        return this.map;
+    }
 }
