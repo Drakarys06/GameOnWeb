@@ -1,4 +1,4 @@
-export function createSlab(scene,x,y){
+export function createSlabUp(scene,x,y){
     let slab = BABYLON.MeshBuilder.CreateBox("slab", { height: 2,width: 5, depth: 2 }, scene);
     slab.position.x = x;
     slab.position.y = y;
