@@ -1,7 +1,8 @@
 export function createSlabUp(scene,x,y){
-    let slab = BABYLON.MeshBuilder.CreateBox("slab", { height: 2,width: 5, depth: 2 }, scene);
+    let slab = BABYLON.MeshBuilder.CreateBox("slabUp", { height: 2,width: 5, depth: 2 }, scene);
     slab.position.x = x;
     slab.position.y = y;
+    slab.checkCollisions = true;
     const boxMat = new BABYLON.StandardMaterial("boxMat");
     boxMat.diffuseTexture = new BABYLON.Texture("https://www.babylonjs-playground.com/textures/floor.png");
     slab.material = boxMat;

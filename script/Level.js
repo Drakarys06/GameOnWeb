@@ -8,6 +8,7 @@ export default class Level {
         this.scene = scene;
         this.block = new createBlock(scene, 0, 0);
         this.map = "Test";
+        this.blocks = [];
     }
 
     createLevel() {
@@ -20,14 +21,17 @@ export default class Level {
                 case 'X':
                     this.block = new createBlock(this.scene, -(x * 5), y);
                     x++;
+                    this.blocks.push(this.block);
                     break;
                 case 'U':
                     this.block = new createSlabUp(this.scene, -(x * 5), y+1);
                     x++;
+                    this.blocks.push(this.block);
                     break;
                 case 'D':
                     this.block = new createSlabDown(this.scene, -(x * 5), y - 1);
                     x++;
+                    this.blocks.push(this.block);
                     break;
                 case 'L':
                     x = 0;
@@ -44,8 +48,8 @@ export default class Level {
         this.map =
             //Level 1       X = block, D = slabDown, U = slabUp, L = new line, - = empty space
             //down of the level
-            'XXXXXXXDDXXXXXXXXXXXXXL' +
-            'X----------DDXXXXXXXXXL' +
+            'XXXXXXXDDXDDXDDXDDXXXXL' +
+            'X---------------------L' +
             'X--------------DDXXXXXL' +
             'XXXXXXXXUUUUU------DDXL' +
             'XXXXXXXXXXXXDDDD-----XL';      

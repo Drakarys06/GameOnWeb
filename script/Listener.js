@@ -1,4 +1,3 @@
-import Hero from "./Hero.js";
 export default class Listener {
     constructor(scene) {
         scene.actionManager = new BABYLON.ActionManager(scene);
@@ -15,7 +14,6 @@ export default class Listener {
             this.updateFromKeyboard();
         });
     }
-
     updateFromKeyboard() {
         //Forward Checks (KeyRight)
         if (this.inputMap["ArrowRight"]) {
@@ -28,6 +26,7 @@ export default class Listener {
         //Jump Checks (SPACE)
         if (this.inputMap[" "]) {
             console.log("Jump");
+            return "jump";
         }
     }
 }

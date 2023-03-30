@@ -25,13 +25,21 @@ const createScene = function () {
     var hero = new Hero(scene);
     //creation of the listener to move the hero
     var input = new Listener(scene);
-
-
+    
     // Register a render loop to repeatedly render the scene
     var toRender = function () {
+        scene.registerBeforeRender();
         hero.moveForward();
         camera.updateCamera(hero.hero);
-        input.updateFromKeyboard(hero.hero);
+        if (input.updateFromKeyboard() === "jump") {
+            hero.jump();
+        }
+        //detect collision between all the blocks and hero to past the jumping state to false
+        for (var i = 0; i < level.blocks.length; i++) {
+            if (hero.hero.intersectsMesh(level.blocks[i], true)) {
+                hero.resetJump();
+            }
+        }
         scene.render();
     };
     engine.runRenderLoop(toRender);

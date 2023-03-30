@@ -11,7 +11,7 @@ export default class Camera{
     updateCamera(hero){
         this.camera.position.x = hero.position.x;
         this.camera.position.y = hero.position.y + 10;
-        this.camera.position.z = hero.position.z + 30;
+        this.camera.position.z = hero.position.z + 70;
     }
 }
 

@@ -1,12 +1,13 @@
 export default class Hero {
     constructor(scene) {
-        this.hero = BABYLON.MeshBuilder.CreateSphere("Hero", { diameter: 2 }, scene);
+        this.hero = BABYLON.MeshBuilder.CreateSphere("hero", { diameter: 2 }, scene);
 
         this.hero.position.x = -4;
         this.hero.position.y = 6;
         this.hero.position.z = 0;
 
         this.hero.jumpForce = 3;
+        this.hero.jumping = false;
 
         this.hero.physicsImpostor = new BABYLON.PhysicsImpostor(this.hero, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0 }, scene);
     }
@@ -20,6 +21,15 @@ export default class Hero {
     }
 
     jump() {
-        this.hero.position.y = hero.jumpForce;
+        if (!this.hero.jumping) {
+            this.hero.position.y += this.hero.jumpForce;
+            this.hero.jumping = true;
+            console.log("Jump");
+        }
+    }
+
+    resetJump() {
+        console.log("Reset Jump");
+        this.hero.jumping = false;
     }
 }
