@@ -24,21 +24,22 @@ const createScene = function () {
     //creation of the hero
     var hero = new Hero(scene);
     //creation of the listener to move the hero
-    var input = new Listener(scene);
-    
+    var input = new Listener(scene,hero);
+
     // Register a render loop to repeatedly render the scene
     var toRender = function () {
         scene.registerBeforeRender();
-        hero.moveForward();
+        hero.move();
         camera.updateCamera(hero.hero);
-        if (input.updateFromKeyboard() === "jump") {
-            hero.jump();
-        }
         //detect collision between all the blocks and hero to past the jumping state to false
         for (var i = 0; i < level.blocks.length; i++) {
             if (hero.hero.intersectsMesh(level.blocks[i], true)) {
                 hero.resetJump();
             }
+        }
+        if (hero.hero.intersectsMesh(level.door[0], true)) {
+            hero.hero.position.x = -4;
+            hero.hero.position.y = 86;
         }
         scene.render();
     };

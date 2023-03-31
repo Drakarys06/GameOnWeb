@@ -5,6 +5,7 @@ export default class Hero {
         this.hero.position.x = -4;
         this.hero.position.y = 6;
         this.hero.position.z = 0;
+        this.hero.speed = -0.15;
 
         this.hero.jumpForce = 3;
         this.hero.jumping = false;
@@ -12,12 +13,16 @@ export default class Hero {
         this.hero.physicsImpostor = new BABYLON.PhysicsImpostor(this.hero, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0 }, scene);
     }
 
+    move(){
+        this.hero.moveWithCollisions(new BABYLON.Vector3(this.hero.speed, 0, 0));
+    }
+
     moveForward() {
-        this.hero.moveWithCollisions(new BABYLON.Vector3(-0.1, 0, 0));
+        this.hero.speed = -0.15;
     }
 
     moveBackward() {
-        this.hero.moveWithCollisions(new BABYLON.Vector3(0.1, 0, 0));
+        this.hero.speed = 0.15;
     }
 
     jump() {

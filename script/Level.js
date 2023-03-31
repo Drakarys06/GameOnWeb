@@ -1,6 +1,7 @@
 import { createBlock } from "./Block.js";
 import { createSlabDown } from "./SlabDown.js";
 import { createSlabUp } from "./SlabUp.js";
+import { createDoor } from "./Door.js";
 
 export default class Level {
 
@@ -9,6 +10,7 @@ export default class Level {
         this.block = new createBlock(scene, 0, 0);
         this.map = "Test";
         this.blocks = [];
+        this.door = [];
     }
 
     createLevel() {
@@ -24,7 +26,7 @@ export default class Level {
                     this.blocks.push(this.block);
                     break;
                 case 'U':
-                    this.block = new createSlabUp(this.scene, -(x * 5), y+1);
+                    this.block = new createSlabUp(this.scene, -(x * 5), y + 1);
                     x++;
                     this.blocks.push(this.block);
                     break;
@@ -33,12 +35,21 @@ export default class Level {
                     x++;
                     this.blocks.push(this.block);
                     break;
+                case 'O':
+                    this.block = new createDoor(this.scene, -(x * 5), y);
+                    x = x + 3;
+                    this.door.push(this.block);
+                    break;
                 case 'L':
                     x = 0;
                     y += 4;
                     break;
                 case '-':
                     x++;
+                    break;
+                case 'E':
+                    x = 0;
+                    y = 50;
                     break;
             }
         }
@@ -47,14 +58,27 @@ export default class Level {
     getMap() {
         this.map =
             //Level 1       X = block, D = slabDown, U = slabUp, L = new line, - = empty space
+            //              E = end of the level, O = door
             //down of the level
-            'XXXXXXXDDXDDXDDXDDXXXXL' +
-            'X---------------------L' +
-            'X--------------DDXXXXXL' +
-            'XXXXXXXXUUUUU------DDXL' +
-            'XXXXXXXXXXXXDDDD-----XL';      
-            //up of the level
-        //Level 2
+            'XXXXXXXDDXXXXXX-------XXXXXDDDDDXX-------L' +
+            'X--------O-DDXX-------X---------XXXXXX---L' +
+            'X--------------DDXX---X-------------DDXXXL' +
+            'X------------------DDXX----------------DXL' +
+            '-----------------------DDXUUUDDDD-------XLE' +
+            //up of the levelU
+            //Level 2
+            '--------XXXXXXXXXXXXXXXXXXXX----------L' +
+            '------XXDD---------------DDXXX--------L' +
+            '------XX----------------UU---DDX------L' +
+            '------XX-----DDXXXX---XX-------X------L' +
+            '--------XX------DDXXXX-------UUX------L' +
+            '----------XX------X------UUUUXXX------L' +
+            '----------XXUU----X-X--------DDXXXXXXXL' +
+            '--------XXXX------X-DDD-------------OXL' +
+            'XXXXXXDDDD--------X------------------XL' +
+            'X-----------------X------------------XL' +
+            'X-----------------X------------------XLE';
+
         return this.map;
     }
 }

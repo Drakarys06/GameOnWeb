@@ -1,9 +1,9 @@
 export default class Listener {
-    constructor(scene) {
+    constructor(scene, hero) {
         scene.actionManager = new BABYLON.ActionManager(scene);
 
         this.inputMap = {};
-
+        this.hero = hero;
         scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyDownTrigger, (evt) => {
             this.inputMap[evt.sourceEvent.key] = evt.sourceEvent.type == "keydown";
         }));
@@ -14,19 +14,24 @@ export default class Listener {
             this.updateFromKeyboard();
         });
     }
+
     updateFromKeyboard() {
-        //Forward Checks (KeyRight)
-        if (this.inputMap["ArrowRight"]) {
-            console.log("Forward");
-        }
-        //Backward Checks (KeyLeft)
-        if (this.inputMap["ArrowLeft"]) {
-            console.log("Backward");
-        }
-        //Jump Checks (SPACE)
-        if (this.inputMap[" "]) {
-            console.log("Jump");
-            return "jump";
-        }
+        document.addEventListener('keydown', (event) => {
+            //Forward Checks (KeyRight)
+            if (event.code === 'ArrowRight') {
+                console.log("Forward");
+                this.hero.moveForward();
+            }
+            //Backward Checks (KeyLeft)
+            if (event.code === 'ArrowLeft') {
+                console.log("Backward");
+                this.hero.moveBackward();
+            }
+            //Jump Checks (SPACE)
+            if (event.code === 'Space') {
+                console.log("Jump");
+                this.hero.jump();
+            }
+        });
     }
 }
